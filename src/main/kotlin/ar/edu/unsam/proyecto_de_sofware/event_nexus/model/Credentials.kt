@@ -6,7 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 @Entity
-class Credentials : UserDetails{
+open class Credentials : UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
