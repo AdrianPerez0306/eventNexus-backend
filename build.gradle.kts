@@ -5,7 +5,8 @@ plugins {
 	kotlin("plugin.serialization") version "1.6.0"
 	id("org.springframework.boot") version "3.4.4"
 	id("io.spring.dependency-management") version "1.1.7"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.9.25" // ESTE es el que necesitas
+	// Haces todas las clases 'open' para Spring y JPA pueda hacer proxys de las clases
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.9.25" 
 	war
 }
 
