@@ -13,7 +13,7 @@ import ar.edu.unsam.proyecto_de_sofware.event_nexus.service.UserService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
-@CrossOrigin(origins = ["http://localhost:8080", "http://localhost:5173", "http://localhost:3001"])
+@CrossOrigin(origins = ["https://event-nexus-react.onrender.com"])
 @RestController
 @RequestMapping("/auth")
 class AuthController(

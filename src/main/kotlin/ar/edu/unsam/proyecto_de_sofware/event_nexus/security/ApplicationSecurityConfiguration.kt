@@ -144,7 +144,7 @@ class ApplicationSecutityConfiguration(
     @Bean
     fun corsConfigurationSource(): UrlBasedCorsConfigurationSource {
         val configuration = CorsConfiguration()
-        configuration.allowedOrigins = listOf("http://localhost:5173", "http://localhost:3001")
+        configuration.allowedOrigins = listOf("https://event-nexus-react.onrender.com")
         configuration.allowedMethods = listOf("*")
         configuration.allowedHeaders = listOf("*")
         val source = UrlBasedCorsConfigurationSource()
