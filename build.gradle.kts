@@ -5,7 +5,8 @@ plugins {
 	kotlin("plugin.serialization") version "1.6.0"
 	id("org.springframework.boot") version "3.4.4"
 	id("io.spring.dependency-management") version "1.1.7"
-	jacoco
+	// Haces todas las clases 'open' para Spring y JPA pueda hacer proxys de las clases
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.9.25" 
 	war
 }
 
@@ -26,7 +27,6 @@ val mockkVersion = "1.13.9"
 val kotestVersion = "5.8.0"
 
 dependencies {
-	developmentOnly("org.springframework.boot:spring-boot-devtools")
 
 //	basic spring boot
 	implementation("org.springframework.boot:spring-boot-starter-data-rest")
@@ -43,8 +43,8 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-api:0.12.6")
 	implementation("io.jsonwebtoken:jjwt-impl:0.12.6")
 	implementation("com.auth0:java-jwt:4.4.0")
-
 	implementation("io.jsonwebtoken:jjwt-jackson:0.12.6")
+
 //	TESTING
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
@@ -52,53 +52,10 @@ dependencies {
 	testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
 	testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-//.env
-	implementation("me.paulschwarz:spring-dotenv:4.0.0")
 
 
 	//mail
 	implementation("org.springframework.boot:spring-boot-starter-mail")
 }
 
-kotlin {
-	compilerOptions {
-		freeCompilerArgs.addAll("-Xjsr305=strict")
-	}
-}
 
-tasks.withType<Test> {
-	useJUnitPlatform()
-}
-
-tasks.test {
-	finalizedBy(tasks.jacocoTestReport)
-}
-
-tasks.jacocoTestReport {
-	dependsOn(tasks.test)
-}
-
-jacoco {
-	toolVersion = "0.8.12"
-}
-
-tasks.jacocoTestReport {
-	classDirectories.setFrom(
-		files(classDirectories.files.map {
-			fileTree(it) {
-				exclude("**/config/**", "**/entity/**", "**/*Application*.*", "**/ServletInitializer.*")
-			}
-		})
-	)
-	reports {
-		xml.required.set(true)
-		csv.required.set(true)
-		html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
-	}
-}
-
-tasks.register("runOnGitHub") {
-	dependsOn("jacocoTestReport")
-	group = "custom"
-	description = "$ ./gradlew runOnGitHub # runs on GitHub Action"
-}

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter
 import java.util.concurrent.TimeUnit
 
-@CrossOrigin(origins = ["http://localhost:8080", "http://localhost:5173", "http://localhost:3001"])
+@CrossOrigin(origins = ["https://event-nexus-react.onrender.com"])
 @RestController
 @RequestMapping("/notification")
 class NotificationController(

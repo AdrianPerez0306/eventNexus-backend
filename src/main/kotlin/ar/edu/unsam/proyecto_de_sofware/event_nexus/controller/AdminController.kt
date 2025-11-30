@@ -21,7 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.web.bind.annotation.*
 
 
-@CrossOrigin(origins = ["http://localhost:4200", "http://localhost:5173", "http://localhost:3001"])
+@CrossOrigin(origins = ["https://event-nexus-react.onrender.com"])
 @RestController
 @RequestMapping("/admin")
 class AdminController(
